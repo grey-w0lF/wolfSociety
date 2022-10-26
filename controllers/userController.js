@@ -74,6 +74,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find();
   if (users) {
     res.json(users);
+  } else {
+    res.status(400);
+    throw new Error("Something Went Wrong");
   }
 });
 
@@ -81,13 +84,21 @@ const getAllUsers = asyncHandler(async (req, res) => {
 //@route POST /api/users/me
 //@access Private
 
-const getMe = asyncHandler((req, res) => {
-  res.json({ message: "Done" });
+const getUser = asyncHandler(async (req, res) => {
+  const cardId = req.params.cardId;
+
+  const user = await User.findOne({ cardId });
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
 });
 
 module.exports = {
   registerUser,
   loginUser,
-  getMe,
+  getUser,
   getAllUsers,
 };

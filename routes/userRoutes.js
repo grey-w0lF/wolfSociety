@@ -3,12 +3,12 @@ const router = express.Router();
 const {
   registerUser,
   loginUser,
-  getMe,
-  getAllUsers
+  getUser,
+  getAllUsers,
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/all", getAllUsers);
-router.get("/me", getMe);
+router.get("/user/:cardId", getUser);
 module.exports = router;
