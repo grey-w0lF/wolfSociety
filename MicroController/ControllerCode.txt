@@ -1,0 +1,143 @@
+#ifdef ESP8266
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#else
+#include <WiFi.h>
+#include <HTTPClient.h>
+#endif
+
+#include <SPI.h>
+#include <MFRC522.h>
+#include <Arduino_JSON.h>
+#include <AsyncTimer.h>
+
+using namespace std;
+
+TaskHandle_t Task1, Task2;
+AsyncTimer t;
+
+#define WIFI_TIMEOUT_MS 20000
+
+JSONVar myObject;
+
+String URL_BUFFER = "https://wolfsociety.herokuapp.com/api/users/user/";
+
+const char* ssid = "POCO F4";
+const char* password = "1234567890";
+
+constexpr uint8_t RST_PIN = 22;
+constexpr uint8_t SS_PIN = 21;
+
+MFRC522 rfid(SS_PIN, RST_PIN);
+MFRC522::MIFARE_Key key;
+
+void connectToWiFi(){
+  Serial.print("Connect to WiFi");
+//  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  unsigned long startAttemptTime = millis();
+  while(WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < WIFI_TIMEOUT_MS){
+    Serial.print(".");
+    delay(100);
+  }
+  if(WiFi.status() != WL_CONNECTED){
+    Serial.println("Failed");
+  }else{
+    Serial.println(WiFi.localIP());
+  }
+}
+
+String ReadData(){
+  String tag = "";
+  while (! rfid.PICC_IsNewCardPresent()) delay(100);
+  if (rfid.PICC_ReadCardSerial()) {
+    for (byte i = 0; i < 4; i++) {
+      tag += rfid.uid.uidByte[i];
+    }
+  } // Print details of the card
+  Serial.println(tag);
+  rfid.PICC_HaltA();
+  rfid.PCD_StopCrypto1();
+  return tag;
+}
+
+void ConnectToServer(){
+  String SIDE_URL = ReadData();
+  String MAIN_URL = URL_BUFFER + SIDE_URL;
+  HTTPClient http;
+  http.begin(MAIN_URL);
+  int stat = http.GET();
+  try{
+    if(stat > 0 && stat != 404){
+      Serial.println("Granting Access, please wait ...");
+      String payLoad = http.getString();
+      Serial.println((String) stat + " = " + payLoad);
+      myObject = JSON.parse(payLoad);
+    }else{
+      throw(stat);
+    }
+  }
+  catch(int err){
+    Serial.print(err );
+    Serial.println(" Access Denied");
+  }
+  http.end();
+}
+
+
+void ServerConnect(void* parameters){
+  Serial.println(xPortGetCoreID());
+  for(;;){
+    ConnectToServer();
+    delay(100);
+  }
+}
+
+//void handel(void* parameters){
+//  Serial.println(xPortGetCoreID());
+//  for(;;){
+//    t.handle();
+//  }
+//}
+
+void setup() {
+  Serial.begin(115200);
+  SPI.begin();
+  rfid.PCD_Init();
+  
+  while(!Serial);
+  
+  connectToWiFi();
+//  pinMode(LED_BUILTIN, OUTPUT);
+//  t.setInterval([]() {
+//    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+//  },1000);
+  delay(5000);
+
+  xTaskCreatePinnedToCore(
+    ServerConnect,
+    "Task1",
+    10000,
+    NULL,
+    1,
+    &Task1,
+    0);
+
+  delay(500);
+
+//  xTaskCreatePinnedToCore(
+//    handel,
+//    "Task2",
+//    10000,
+//    NULL,
+//    1,
+//    &Task2,
+//    1);
+
+//  delay(500);
+}
+ 
+void loop() {
+
+}
