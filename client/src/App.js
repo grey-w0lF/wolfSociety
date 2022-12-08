@@ -3,6 +3,7 @@ import HomePage from "./components/HomePage/HomePage";
 import AppBar from "./components/Appbar/Appbar";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/userScreens/Login";
+import ControlPanel from "./components/userScreens/ControlPanel";
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/panel" element={<ControlPanel />} />
         </Routes>
         <Footer />
       </BrowserRouter>

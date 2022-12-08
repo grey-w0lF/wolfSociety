@@ -28,19 +28,19 @@ const Footer = () => {
         <Grid item>
           <Grid container justifyContent="center" alignItems="center">
             <Grid item className="socialIcons" component={Link}>
-              <LinkedIn />
+              <LinkedIn className="icon" />
               <p>LinkedIn</p>
             </Grid>
             <Grid item className="socialIcons" component={Link}>
-              <AccountCircle />
+              <AccountCircle className="icon" />
               <p>Portfolio</p>
             </Grid>
             <Grid item className="socialIcons" component={Link}>
-              <Instagram />
+              <Instagram className="icon" />
               <p>Instagram</p>
             </Grid>
             <Grid item className="socialIcons" component={Link}>
-              <ChatBubble />
+              <ChatBubble className="icon" />
               <p>Contact</p>
             </Grid>
           </Grid>

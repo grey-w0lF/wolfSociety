@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cookie&family=IBM+Plex+Mono&display=swap');
-
-
-
+@import url("https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=IBM+Plex+Mono&display=swap");
 
 body {
   margin: 0;
@@ -11,31 +8,20 @@ body {
   box-sizing: border-box;
   background-color: #f2f2f2;
 }
+html {
+  font-size: 62.5%;
+}
 
 
-
-
-@media screen and (max-width: 1500px) {
-  html {
-    font-size: 70%;
-  }
+@media screen and (max-width: 1200px) {
 }
 
 @media screen and (max-width: 992px) {
-  html {
-    font-size: 67%;
-  }
 }
 
 @media screen and (max-width: 768px) {
-  html                                     /* Medium */ {
-    font-size: 63%;
-  }
 }
 
 @media screen and (max-width: 576px) {
-  html {
-    font-size: 60%;
-  }
-  
+
 }
