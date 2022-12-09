@@ -11,6 +11,7 @@ import {
 const ControlPanel = () => {
   const [addModal, setAddModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [modalHeader, setModalHeader] = useState("");
   const handleClose = () => {
     setAddModal(false);
     setDeleteModal(false);
@@ -25,6 +26,7 @@ const ControlPanel = () => {
               <li
                 className="item"
                 onClick={() => {
+                  setModalHeader("Add User");
                   setAddModal(true);
                 }}
               >
@@ -33,15 +35,28 @@ const ControlPanel = () => {
               <li
                 className="item"
                 onClick={() => {
+                  setModalHeader("Delete User");
                   setDeleteModal(true);
                 }}
               >
                 <PersonRemove className="icon" /> Delete User
               </li>
-              <li className="item">
+              <li
+                className="item"
+                onClick={() => {
+                  setModalHeader("Update User");
+                  setAddModal(true);
+                }}
+              >
                 <ManageAccounts className="icon" /> Update User
               </li>
-              <li className="item">
+              <li
+                className="item"
+                onClick={() => {
+                  setModalHeader("User Details");
+                  setDeleteModal(true);
+                }}
+              >
                 <AccountBox className="icon" /> User Details
               </li>
             </ul>
@@ -59,7 +74,7 @@ const ControlPanel = () => {
                 }}
               >
                 <div className="modal">
-                  <h1>Add User </h1>
+                  <h1>{modalHeader}</h1>
                   <Grid container direction="column" justifyContent="center">
                     <Grid item>
                       <p>Name</p>
@@ -119,7 +134,7 @@ const ControlPanel = () => {
                 }}
               >
                 <div className="modal">
-                  <h1>Delete User</h1>
+                  <h1>{modalHeader}</h1>
                   <Grid container direction="column" justifyContent="center">
                     <Grid item>
                       <p>Email</p>

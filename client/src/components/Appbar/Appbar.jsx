@@ -70,21 +70,43 @@ const Appbar = () => {
                 <Popper id={id} open={open} anchorEl={anchorEl}>
                   <Box>
                     <ul className="toggleMenu">
-                      <Link style={{ textDecoration: "none" }} to="/">
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to="/"
+                        onClick={handleClick}
+                      >
                         <li className="items">
                           <HomeIcon className="icons" /> Home
                         </li>
                       </Link>
 
-                      <Link style={{ textDecoration: "none" }} to="/login">
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to="/login"
+                        onClick={handleClick}
+                      >
                         <li className="items">
                           <LoginIcon className="icons" /> Login
                         </li>
                       </Link>
 
-                      <Link style={{ textDecoration: "none" }} to="/about">
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to="/about"
+                        onClick={handleClick}
+                      >
                         <li className="items">
                           <TravelExploreIcon className="icons" /> About Us
+                        </li>
+                      </Link>
+
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to="/panel"
+                        onClick={handleClick}
+                      >
+                        <li className="items">
+                          <LoginIcon className="icons" /> Panel
                         </li>
                       </Link>
                     </ul>
