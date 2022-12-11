@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../model/userModel");
-const jwt = require("jsonwebtoken");
+const genToken = require("../generateToken");
 const bcrypt = require("bcryptjs");
 
 //@desc Register A New User
@@ -11,12 +11,11 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, dob, admin, gender, phoneNo, cardId } =
     req.body;
 
-  if (!name || !email || !password) {
-    res.status(400);
-    throw new Error("Fields Are Required");
+  if (!name || !email || !password || !admin) {
+    res.status(400).json({ message: "These Are required Fields" });
   }
 
-  const userExists = await User.findOne({ email });
+  const userExists = await User.findOne({ $or: [{ email }, { cardId }] });
   if (userExists) {
     res.status(400);
     throw new Error("User already Exists");
@@ -41,8 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
-    res.status(400);
-    throw new Error("Invalid User Data");
+    res.status(400).json({ message: "Invalid data" });
   }
 });
 
@@ -55,14 +53,18 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-    });
+    if (user.admin) {
+      res.status(201).json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        token: genToken.genToken(user.id),
+      });
+    } else {
+      res.status(400).json({ message: "Only Admins Can Sign in" });
+    }
   } else {
-    res.status(400);
-    throw new Error("Invalid Credentials");
+    res.status(400).json({ message: "Invalid Credentials" });
   }
 });
 
@@ -75,24 +77,39 @@ const getAllUsers = asyncHandler(async (req, res) => {
   if (users) {
     res.json(users);
   } else {
-    res.status(400);
-    throw new Error("Something Went Wrong");
+    res.status(400).json({ message: "Something went Wrong" });
   }
 });
 
 //@desc Get User
-//@route POST /api/users/me
+//@route POST /api/users/user/details/cardid
 //@access Private
 
 const getUser = asyncHandler(async (req, res) => {
-  const cardId = req.params.cardId;
+  const cardId = req.params.cardid;
 
   const user = await User.findOne({ cardId });
-  if (user) {
+  if (user && user.email == req.body.email) {
     res.json(user);
   } else {
-    res.status(404);
-    throw new Error("User Not Found");
+    res.status(404).json({ message: "User Not Found" });
+  }
+});
+
+//@desc Remove User
+//@route Delete /api/user/remove
+//@acess private
+
+const removeUser = asyncHandler(async (req, res) => {
+  const cardId = req.params.cardid;
+  const email = req.body.email;
+
+  const user = await User.findOne({ cardId });
+  if (user && user.email == req.body.email) {
+    await User.findOneAndRemove({ cardId });
+    res.json({ message: "User Removed Successfully" });
+  } else {
+    res.status(404).json({ message: "User Not Found" });
   }
 });
 
@@ -101,4 +118,5 @@ module.exports = {
   loginUser,
   getUser,
   getAllUsers,
+  removeUser,
 };
