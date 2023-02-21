@@ -1,0 +1,155 @@
+.loginScreen {
+  min-height: 80vh;
+  margin-top: 6.5rem;
+}
+.panel {
+  margin-top: calc(7rem + 1vw);
+}
+.panel .one {
+  background-color: #112637;
+  min-height: 85vh;
+}
+.loginForm {
+  background-color: #112637;
+  min-height: calc(40rem + 2vw);
+}
+.loginForm h1 {
+  text-align: center;
+  margin-top: calc(5rem + 1vw);
+  font-size: calc(2rem + 1vw);
+  color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+.loginForm p {
+  display: inline-block;
+  color: #f2f2f2 !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  margin-left: 1.5rem;
+  width: 100px;
+}
+.loginForm button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: #112637;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  padding: 0.4rem;
+  margin-bottom: 5rem;
+  color: #f2f2f2;
+  margin-top: 5rem;
+}
+.loginForm button .icons {
+  color: #eb0042;
+  font-size: 1.6rem;
+
+  position: relative;
+  top: 0.2rem;
+}
+.loginForm button:hover {
+  color: #112637;
+  background-color: #f2f2f2;
+}
+.loginForm input {
+  margin-left: 3rem;
+  margin-right: 1rem;
+  height: 1.5rem;
+  width: 250px;
+}
+
+.panel .Menu {
+  list-style-type: none;
+  margin-top: calc(2rem + 1vw);
+}
+.panel .Menu .item {
+  color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(1rem + 1vw) !important;
+  margin: calc(1.1rem + 1vw);
+  cursor: pointer;
+}
+
+.panel .Menu .item .icon {
+  color: #eb0042;
+  font-size: calc(2rem + 1vw);
+  padding: 2px;
+  position: relative;
+  top: calc(0.4rem + 0.5vw);
+}
+.panel .two h1 {
+  text-align: center;
+  color: #112637;
+  font-size: calc(2rem + 1vw);
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: calc(1rem + 1vw);
+}
+.modal {
+  min-width: 40vw;
+}
+.modal p {
+  color: #112637;
+  font-size: calc(1rem + 1vw);
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  min-width: calc(8rem + 1vw);
+  margin-left: calc(0.5rem + 1vw);
+}
+
+.modal input {
+  margin-right: 0.5rem;
+  width: 60%;
+}
+.modal span {
+  float: right;
+  color: #eb0042;
+}
+.modal h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(1.2rem + 1vw);
+  text-align: center;
+  color: #112637;
+}
+.modal span .icon {
+  font-size: calc(2rem + 1vw);
+  padding: 5px;
+}
+.modal button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #112637;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #f2f2f2;
+  margin-top: 5rem;
+}
+.modal .radioBtn {
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  accent-color: #eb0042;
+
+  color: #eb0042;
+}
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 900px) {
+  .panel .one {
+    min-height: auto;
+  }
+}
+
+@media screen and (max-width: 700px) {
+}
+
+@media screen and (max-width: 576px) {
+  .modal {
+    min-width: 100vw !important;
+  }
+}

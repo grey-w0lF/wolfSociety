@@ -1,0 +1,77 @@
+.AppBar {
+  background-color: #112637 !important;
+  position: absolute;
+}
+.AppBar img {
+  width: calc(12rem + 1vw);
+  margin-left: 8px;
+}
+.AppBar p {
+  font-size: calc(2rem + 1vw);
+  color: #f2f2f2;
+  margin-left: 8px;
+  letter-spacing: 0.2rem;
+  font-family: "Cookie", cursive;
+}
+.AppBar p:hover {
+  color: #eb0042;
+}
+.NavMenu .items {
+  margin-right: 20px;
+  color: #f2f2f2;
+  font-size: calc(0.8rem + 1vw);
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+}
+
+.NavMenu .items .icons {
+  color: #eb0042;
+  position: relative;
+  font-size: calc(1.8rem + 1vw);
+  top: 8px;
+}
+.toggleButton {
+  display: none;
+}
+.toggleButton .icon {
+  color: #eb0042;
+  padding: 10px;
+  font-size: 40px;
+}
+.toggleMenu {
+  border: 3px solid #eb0042;
+  background-color: #112637 !important;
+  list-style: none;
+  
+}
+.toggleMenu .items {
+  color: #f2f2f2;
+  font-size: 1.8rem;
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.toggleMenu .items .icons {
+  color: #eb0042;
+  font-size: 2.2rem;
+  position: relative;
+  top: 4px;
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+  .NavMenu {
+    display: none;
+  }
+  .toggleButton {
+    display: block;
+  }
+}

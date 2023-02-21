@@ -1,0 +1,38 @@
+.Footer {
+  background-color: #112637;
+}
+.credit {
+  color: #f2f2f2;
+  font-family: "Cookie", cursive;
+  font-size: calc(1.8rem + 0.5vw);
+  letter-spacing: 0.4rem;
+  font-weight: 100;
+}
+.credit .icon {
+  color: #eb0042;
+  position: relative;
+  font-size: calc(1.8rem + 0.5vw);
+  top: 0.4rem;
+  margin-left: 0.5rem;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.socialIcons .icon {
+  color: #eb0042;
+  font-size: calc(1.8rem + 1vw);
+}
+.socialIcons p {
+  color: #f2f2f2;
+  padding-left: 0.5rem;
+  font-size: calc(1.1rem + 1vw);
+  letter-spacing: 0.1rem;
+}
